@@ -1,0 +1,78 @@
+---
+import type { SiteCopy } from '../i18n/translations';
+
+interface Props {
+	stats: SiteCopy['about']['stats'];
+	ariaLabel: string;
+}
+
+const { stats, ariaLabel } = Astro.props;
+---
+
+<div class="stats content-shell" aria-label={ariaLabel}>
+	{stats.map((stat) => (
+		<div class:list={['stats__item', { 'stats__item--featured': stat.featured }]}>
+			<strong>{stat.value}</strong>
+			<span>{stat.label}</span>
+		</div>
+	))}
+</div>
+
+<style>
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		margin-top: 102px;
+		border: 1px solid var(--color-border);
+	}
+
+	.stats__item {
+		display: flex;
+		min-height: 122px;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		border-right: 1px solid var(--color-border);
+	}
+
+	.stats__item:last-child {
+		border-right: 0;
+	}
+
+	.stats__item--featured {
+		background: var(--color-ink);
+		color: white;
+	}
+
+	.stats strong {
+		font-size: 39px;
+		font-weight: 800;
+		letter-spacing: -0.055em;
+		line-height: 1;
+	}
+
+	.stats span {
+		margin-top: 14px;
+		font-size: 9px;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	@media (max-width: 760px) {
+		.stats {
+			grid-template-columns: 1fr;
+			margin-top: 68px;
+		}
+
+		.stats__item {
+			min-height: 112px;
+			border-right: 0;
+			border-bottom: 1px solid var(--color-border);
+		}
+
+		.stats__item:last-child {
+			border-bottom: 0;
+		}
+	}
+</style>

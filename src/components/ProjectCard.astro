@@ -1,0 +1,166 @@
+---
+interface Props {
+	index: number;
+	title: string;
+	category: string;
+	description: string;
+	imagePlaceholder: string;
+	viewProject: string;
+	discussProject: string;
+	reverse?: boolean;
+}
+
+const {
+	index,
+	title,
+	category,
+	description,
+	imagePlaceholder,
+	viewProject,
+	discussProject,
+	reverse = false,
+} = Astro.props;
+const indexLabel = String(index).padStart(2, '0');
+---
+
+<article class:list={['project-card', { 'project-card--reverse': reverse }]}>
+	<div class="project-card__visual" role="img" aria-label={`${imagePlaceholder}: ${title}`}>
+		<span>{indexLabel}</span>
+		<p>{imagePlaceholder}</p>
+	</div>
+	<div class="project-card__content">
+		<p class="project-card__category">{category}</p>
+		<h3>{title}</h3>
+		<p class="project-card__description">{description}</p>
+		<a href="#contact" aria-label={`${discussProject} ${title}`}>{viewProject} <span aria-hidden="true">↗</span></a>
+	</div>
+</article>
+
+<style>
+	.project-card {
+		display: grid;
+		grid-template-columns: 0.95fr 1.05fr;
+		align-items: center;
+		gap: 34px;
+	}
+
+	.project-card--reverse .project-card__visual {
+		grid-column: 2;
+		grid-row: 1;
+	}
+
+	.project-card--reverse .project-card__content {
+		grid-column: 1;
+		grid-row: 1;
+	}
+
+	.project-card__visual {
+		position: relative;
+		display: grid;
+		aspect-ratio: 1.18;
+		place-items: center;
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		background: #282826;
+		color: #d8d6d1;
+	}
+
+	.project-card__visual::before,
+	.project-card__visual::after {
+		position: absolute;
+		content: '';
+	}
+
+	.project-card__visual::before {
+		inset: 10%;
+		border: 1px solid #77746d;
+	}
+
+	.project-card__visual::after {
+		width: 1px;
+		height: 150%;
+		transform: rotate(48deg);
+		background: #77746d;
+	}
+
+	.project-card__visual span {
+		position: absolute;
+		top: 16px;
+		left: 19px;
+		z-index: 1;
+		font-size: 12px;
+		font-weight: 700;
+	}
+
+	.project-card__visual p {
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.project-card__category {
+		display: inline-block;
+		margin: 0 0 17px;
+		padding: 8px 11px;
+		background: var(--color-accent);
+		color: white;
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.project-card h3 {
+		margin: 0;
+		font-size: 36px;
+		font-weight: 800;
+		letter-spacing: -0.055em;
+		line-height: 1.02;
+	}
+
+	.project-card__description {
+		max-width: 350px;
+		margin: 21px 0;
+		color: var(--color-muted);
+		font-size: 11px;
+		line-height: 1.55;
+	}
+
+	.project-card__content > a {
+		display: inline-flex;
+		gap: 8px;
+		align-items: center;
+		border-bottom: 1px solid currentColor;
+		padding-bottom: 4px;
+		font-size: 10px;
+		font-weight: 800;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	.project-card__content > a:hover {
+		color: var(--color-accent);
+	}
+
+	@media (max-width: 760px) {
+		.project-card,
+		.project-card--reverse {
+			grid-template-columns: 1fr;
+			gap: 28px;
+		}
+
+		.project-card--reverse .project-card__visual,
+		.project-card--reverse .project-card__content {
+			grid-column: 1;
+			grid-row: auto;
+		}
+
+		.project-card h3 {
+			font-size: 32px;
+		}
+	}
+</style>

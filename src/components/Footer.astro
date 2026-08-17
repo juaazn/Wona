@@ -1,0 +1,101 @@
+---
+import type { SiteCopy } from "../i18n/translations";
+
+interface Props {
+    copy: SiteCopy["footer"];
+}
+
+const { copy } = Astro.props;
+---
+
+<footer class="footer" id="contact">
+    <div class="footer__inner page-shell">
+        <p class="eyebrow">{copy.availability}</p>
+        <h2>{copy.titleLines[0]}<br />{copy.titleLines[1]}</h2>
+        <a class="button button--light" href="mailto:info@wona.com"
+            >info@wona.com</a
+        >
+
+        <div class="footer__bottom">
+            <a class="brand" href="#top"
+                ><span aria-hidden="true">✺</span> wona.</a
+            >
+            <p>© {new Date().getFullYear()} {copy.rights}</p>
+            <a href="#top">{copy.backToTop}</a>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        margin-top: 140px;
+        padding: 100px 0 32px;
+        background: var(--color-ink);
+        color: white;
+        text-align: center;
+    }
+
+    .footer h2 {
+        margin: 24px 0 36px;
+        font-size: clamp(46px, 6vw, 74px);
+        font-weight: 800;
+        letter-spacing: -0.06em;
+        line-height: 0.95;
+        text-transform: uppercase;
+    }
+
+    .footer .button {
+        border-color: #77746f;
+        color: white;
+    }
+
+    .footer__bottom {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        margin-top: 100px;
+        padding-top: 25px;
+        border-top: 1px solid #3c3b38;
+        font-size: 10px;
+    }
+
+    .footer__bottom .brand {
+        justify-self: start;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+        text-decoration: none;
+    }
+
+    .footer__bottom .brand span {
+        color: var(--color-accent);
+    }
+
+    .footer__bottom p {
+        margin: 0;
+        color: #a8a6a0;
+    }
+
+    .footer__bottom > a:last-child {
+        justify-self: end;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    @media (max-width: 760px) {
+        .footer {
+            margin-top: 100px;
+            padding-top: 80px;
+        }
+
+        .footer__bottom {
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .footer__bottom .brand,
+        .footer__bottom > a:last-child {
+            justify-self: center;
+        }
+    }
+</style>

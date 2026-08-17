@@ -1,23 +1,37 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	lang?: 'en' | 'es';
+	title?: string;
+	description?: string;
+	skipLabel?: string;
+}
+
+const {
+	lang = 'en',
+	title = 'Wona — Creative Designer Portfolio',
+	description = 'Editorial portfolio for a product designer and art director.',
+	skipLabel = 'Skip to content',
+} = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#f1f0ee" />
+		<link rel="alternate" hreflang="en" href="/en/" />
+		<link rel="alternate" hreflang="es" href="/es/" />
+		<link rel="alternate" hreflang="x-default" href="/" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
 	</head>
 	<body>
+		<a class="skip-link" href="#main-content">{skipLabel}</a>
 		<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>

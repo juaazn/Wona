@@ -1,0 +1,94 @@
+---
+import type { SiteCopy } from '../i18n/translations';
+
+interface Props {
+	copy: SiteCopy['marquee'];
+}
+
+const { copy } = Astro.props;
+const repeated = [...copy.items, ...copy.items, ...copy.items];
+---
+
+<div class="marquee-frame">
+	<div class="marquee" aria-label={copy.ariaLabel}>
+		<div class="marquee__track">
+			{repeated.map((service) => (
+				<span class="marquee__item"><b>{service}</b><i aria-hidden="true">✦</i></span>
+			))}
+		</div>
+	</div>
+</div>
+
+<style>
+	.marquee-frame {
+		position: relative;
+		z-index: 10;
+		width: 100%;
+		height: 117px;
+		margin-block: -21.5px;
+		overflow: clip;
+	}
+
+	.marquee {
+		position: absolute;
+		top: 21.5px;
+		left: -2%;
+		width: 104%;
+		height: 74px;
+		overflow: hidden;
+		transform: rotate(-2deg);
+		background: var(--color-ink);
+		color: white;
+	}
+
+	.marquee__track {
+		display: flex;
+		width: max-content;
+		height: 100%;
+		align-items: center;
+		animation: marquee 45s linear infinite;
+	}
+
+	.marquee__item {
+		display: inline-flex;
+		align-items: center;
+		gap: 35px;
+		padding-left: 35px;
+		white-space: nowrap;
+	}
+
+	.marquee__item b {
+		font-size: 12px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.marquee__item i {
+		color: var(--color-accent);
+		font-size: 10px;
+		font-style: normal;
+	}
+
+	@keyframes marquee {
+		to {
+			transform: translateX(-33.333%);
+		}
+	}
+
+	@media (max-width: 760px) {
+		.marquee-frame {
+			height: 75px;
+			margin-block: -7px;
+		}
+
+		.marquee {
+			height: 61px;
+			top: 7px;
+		}
+
+		.marquee__item {
+			gap: 23px;
+			padding-left: 23px;
+		}
+	}
+</style>

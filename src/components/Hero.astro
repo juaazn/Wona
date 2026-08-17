@@ -1,0 +1,249 @@
+---
+import type { SiteCopy } from "../i18n/translations";
+
+interface Props {
+    copy: SiteCopy["hero"];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero__inner page-shell">
+        <div class="hero__copy">
+            <h1 id="hero-title">
+                <span>{copy.greeting}</span>
+                <span
+                    >{copy.creativeLead}
+                    <i aria-hidden="true">✺</i>
+                    {copy.creativeRole}</span
+                >
+                <span>{copy.locationLead} <s>{copy.city}</s></span>
+            </h1>
+
+            <p class="hero__disciplines" aria-label={copy.disciplinesLabel}>
+                {
+                    copy.disciplines.map((discipline, index) => (
+                        <Fragment>
+                            <span>{discipline}</span>
+                            {index < copy.disciplines.length - 1 && (
+                                <i aria-hidden="true">✦</i>
+                            )}
+                        </Fragment>
+                    ))
+                }
+            </p>
+
+            <div class="hero__actions">
+                <a class="button button--dark" href="#portfolio"
+                    >{copy.projectCta}</a
+                >
+                <a class="button button--light" href="#contact"
+                    >{copy.talkCta}</a
+                >
+            </div>
+        </div>
+
+        <div class="hero-art" role="img" aria-label={copy.portraitAlt}>
+            <div class="hero-art__circle"></div>
+
+            <div class="portrait-placeholder">
+                <img
+                    class="portrait-image"
+                    src="/images/foto-portafolio.png"
+                    alt={copy.portraitAlt}
+                    width="1122"
+                    height="1402"
+                    loading="eager"
+                    fetchpriority="high"
+                />
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero {
+        position: relative;
+        z-index: 1;
+        min-height: 515px;
+    }
+
+    .hero__inner {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        align-items: center;
+        min-height: 490px;
+        padding-bottom: 20px;
+    }
+
+    .hero__copy {
+        position: relative;
+        z-index: 5;
+    }
+
+    .hero h1 {
+        margin: 0;
+        font-family: var(--font-display);
+        font-size: clamp(37px, 3.55vw, 44px);
+        font-weight: 900;
+        letter-spacing: -0.055em;
+        line-height: 1.04;
+        text-transform: uppercase;
+    }
+
+    .hero h1 span {
+        display: block;
+        white-space: nowrap;
+    }
+
+    .hero h1 i {
+        position: relative;
+        top: -0.03em;
+        display: inline-block;
+        margin-inline: 0.04em;
+        color: var(--color-accent);
+        font-size: 0.68em;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0;
+    }
+
+    .hero h1 s {
+        text-decoration-thickness: 3px;
+        text-decoration-color: var(--color-ink);
+    }
+
+    .hero__disciplines {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin: 31px 0 29px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+    }
+
+    .hero__disciplines i {
+        color: var(--color-accent);
+        font-size: 10px;
+        font-style: normal;
+    }
+
+    .hero__actions {
+        display: flex;
+    }
+
+    .hero__actions .button + .button {
+        border-left: 0;
+    }
+
+    .hero__actions .button:first-child {
+        min-width: 137px;
+    }
+
+    .hero__actions .button:last-child {
+        min-width: 111px;
+    }
+
+    .hero-art {
+        position: relative;
+        width: min(100%, 450px);
+        aspect-ratio: 1;
+        justify-self: end;
+    }
+
+    .hero-art__circle {
+        position: absolute;
+        inset: 3% 1% 1% 3%;
+        z-index: 0;
+        border-radius: 50%;
+        background: #fff;
+
+        left: 50%;
+        z-index: 1;
+        display: grid;
+        width: 78%;
+        height: 78%;
+        place-items: center;
+        transform: translate(-50%, -50%);
+        color: var(--color-accent);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: clamp(250px, 30vw, 330px);
+        font-weight: 400;
+        line-height: 1;
+    }
+
+    .portrait-placeholder {
+        position: absolute;
+        inset: 3% 2% 0;
+        z-index: 3;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .portrait-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center bottom;
+    }
+
+    @media (max-width: 980px) {
+        .hero {
+            min-height: 450px;
+        }
+
+        .hero__inner {
+            min-height: 430px;
+        }
+
+        .hero h1 {
+            font-size: clamp(31px, 4vw, 38px);
+        }
+    }
+
+    @media (max-width: 760px) {
+        .hero {
+            min-height: auto;
+            padding: 48px 0 82px;
+        }
+
+        .hero__inner {
+            grid-template-columns: 1fr;
+            min-height: 0;
+            padding: 0;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 9.4vw, 47px);
+        }
+
+        .hero h1 span {
+            white-space: normal;
+        }
+
+        .hero__disciplines {
+            flex-wrap: wrap;
+            gap: 10px 12px;
+            margin-block: 24px;
+        }
+
+        .hero-art {
+            width: min(100%, 420px);
+            margin-top: 55px;
+            justify-self: center;
+        }
+    }
+
+    @media (max-width: 410px) {
+        .hero h1 {
+            font-size: 30px;
+        }
+
+        .hero__disciplines {
+            font-size: 10px;
+        }
+    }
+</style>

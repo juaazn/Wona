@@ -1,11 +1,47 @@
----
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex" />
+		<title>Wona — Selecting language</title>
+        <link rel="alternate" hreflang="en" href="/en/" />
+        <link rel="alternate" hreflang="es" href="/es/" />
+        <link rel="alternate" hreflang="x-default" href="/" />
+        <script is:inline>
+            const preferredLanguage =
+                navigator.languages?.[0] || navigator.language || "en";
+            const locale = preferredLanguage.toLowerCase().startsWith("es")
+                ? "es"
+                : "en";
+            window.location.replace(`/${locale}/${window.location.hash}`);
+        </script>
+        <noscript><meta http-equiv="refresh" content="0;url=/en/" /></noscript>
+    </head>
+    <body>
+        <p>
+            <a href="/en/">Continue in English</a>
+            <span aria-hidden="true"> · </span>
+            <a href="/es/" lang="es">Continuar en español</a>
+        </p>
+    </body>
+</html>
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
----
+<style>
+    body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+        background: #f1f0ee;
+        color: #11110f;
+        font:
+            700 14px Arial,
+            Helvetica,
+            sans-serif;
+    }
 
-<Layout>
-	<Welcome />
-</Layout>
+    a {
+        color: inherit;
+    }
+</style>

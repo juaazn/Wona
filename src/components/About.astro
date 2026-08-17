@@ -1,0 +1,94 @@
+---
+import type { SiteCopy } from '../i18n/translations';
+import Stats from './Stats.astro';
+
+interface Props {
+	copy: SiteCopy['about'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="about" id="about" aria-labelledby="about-title">
+	<div class="about__grid content-shell">
+		<div class="about__identity">
+			<p class="eyebrow">{copy.eyebrow[0]} <span class="separator" aria-hidden="true">✦</span> {copy.eyebrow[1]}</p>
+			<h2 id="about-title">{copy.titleLines.map((line) => <span>{line}</span>)}</h2>
+		</div>
+
+		<div class="about__bio">
+			<p class="about__lead">{copy.lead}</p>
+			<p class="about__body">{copy.body}</p>
+		</div>
+	</div>
+
+	<Stats stats={copy.stats} ariaLabel={copy.statsLabel} />
+</section>
+
+<style>
+	.about {
+		position: relative;
+		padding-top: 153px;
+	}
+
+	.about__grid {
+		display: grid;
+		grid-template-columns: 0.72fr 1.28fr;
+		gap: 76px;
+		align-items: start;
+	}
+
+	.about__identity h2 {
+		margin: 22px 0 0;
+		font-size: 41px;
+		font-weight: 800;
+		letter-spacing: -0.05em;
+		line-height: 1.05;
+	}
+
+	.about__identity h2 span {
+		display: block;
+		white-space: nowrap;
+	}
+
+	.about__lead {
+		margin: 0;
+		font-size: 22px;
+		font-weight: 800;
+		letter-spacing: -0.035em;
+		line-height: 1.15;
+	}
+
+	.about__body {
+		max-width: 470px;
+		margin: 29px 0 0;
+		color: var(--color-muted);
+		font-size: 11px;
+		line-height: 1.55;
+	}
+
+	@media (max-width: 760px) {
+		.about {
+			padding-top: 95px;
+		}
+
+		.about__grid {
+			grid-template-columns: 1fr;
+			gap: 46px;
+		}
+
+		.about__identity h2 {
+			font-size: clamp(37px, 10vw, 48px);
+		}
+
+		.about__identity h2 span {
+			display: block;
+			white-space: nowrap;
+		}
+
+		.about__lead {
+			font-size: 21px;
+		}
+
+	}
+</style>

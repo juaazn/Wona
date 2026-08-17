@@ -1,0 +1,29 @@
+---
+import type { Locale } from '../i18n/translations';
+import { getTranslation } from '../i18n/translations';
+import Layout from '../layouts/Layout.astro';
+import About from './About.astro';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import Hero from './Hero.astro';
+import Marquee from './Marquee.astro';
+import Portfolio from './Portfolio.astro';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = getTranslation(locale);
+---
+
+<Layout lang={locale} title={copy.seo.title} description={copy.seo.description} skipLabel={copy.skipLabel}>
+	<Header copy={copy.header} />
+	<main id="main-content">
+		<Hero copy={copy.hero} />
+		<Marquee copy={copy.marquee} />
+		<About copy={copy.about} />
+		<Portfolio copy={copy.portfolio} />
+	</main>
+	<Footer copy={copy.footer} />
+</Layout>

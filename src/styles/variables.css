@@ -1,0 +1,15 @@
+:root {
+	--color-paper: #f1f0ee;
+	--color-paper-light: #fafafa;
+	--color-ink: #11110f;
+	--color-muted: #696864;
+	--color-accent: #ef4d38;
+	--color-border: #20201d;
+	--font-display: Arial, Helvetica, sans-serif;
+	--font-body: Arial, Helvetica, sans-serif;
+	--page-width: 1000px;
+	--content-width: 830px;
+	--page-gutter: clamp(24px, 5vw, 60px);
+	--section-gap: clamp(110px, 11vw, 155px);
+	--line-thin: 1px;
+}

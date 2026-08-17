@@ -1,0 +1,49 @@
+---
+import type { SiteCopy } from '../i18n/translations';
+import ProjectCard from './ProjectCard.astro';
+import SectionHeading from './SectionHeading.astro';
+
+interface Props {
+	copy: SiteCopy['portfolio'];
+}
+
+const { copy } = Astro.props;
+---
+
+<section class="portfolio" id="portfolio" aria-labelledby="portfolio-title">
+	<SectionHeading title={copy.title} subtitle={copy.subtitle} id="portfolio-title" />
+	<div class="portfolio__list content-shell">
+		{copy.projects.map((project, index) => (
+			<ProjectCard
+				index={index + 1}
+				reverse={index % 2 === 1}
+				imagePlaceholder={copy.imagePlaceholder}
+				viewProject={copy.viewProject}
+				discussProject={copy.discussProject}
+				{...project}
+			/>
+		))}
+	</div>
+</section>
+
+<style>
+	.portfolio {
+		padding-top: 98px;
+	}
+
+	.portfolio__list {
+		display: grid;
+		gap: 89px;
+		margin-top: 52px;
+	}
+
+	@media (max-width: 760px) {
+		.portfolio {
+			padding-top: 88px;
+		}
+
+		.portfolio__list {
+			gap: 76px;
+		}
+	}
+</style>
