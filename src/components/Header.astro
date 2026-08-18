@@ -21,7 +21,7 @@ const { copy } = Astro.props;
 			<a href="#contact">{copy.contact}</a>
 		</nav>
 
-		<a class="header-cta" href="#contact">{copy.talk}</a>
+		<a class="header-cta" href="#contact" data-contact-modal>{copy.talk}</a>
 
 		<details class="mobile-menu">
 			<summary aria-label={copy.openNavigation}>{copy.menu}</summary>

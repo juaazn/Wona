@@ -24,8 +24,6 @@ export interface SiteCopy {
 		greeting: string;
 		creativeLead: string;
 		creativeRole: string;
-		locationLead: string;
-		city: string;
 		disciplinesLabel: string;
 		disciplines: string[];
 		projectCta: string;
@@ -54,7 +52,19 @@ export interface SiteCopy {
 			title: string;
 			category: string;
 			description: string;
+			image?: string;
+			imageAlt?: string;
+			imageFit?: 'cover' | 'contain';
+			url?: string;
 		}>;
+	};
+	contactModal: {
+		eyebrow: string;
+		title: string;
+		description: string;
+		whatsapp: string;
+		email: string;
+		close: string;
 	};
 	footer: {
 		availability: string;
@@ -85,10 +95,8 @@ export const translations: Record<Locale, SiteCopy> = {
 		},
 		hero: {
 			greeting: "Hi, I'm Juan.",
-			creativeLead: 'A creative',
+			creativeLead: 'Digital product',
 			creativeRole: 'designer',
-			locationLead: 'Based in',
-			city: 'London',
 			disciplinesLabel: 'Design, development, phone and Webflow',
 			disciplines: ['Design', 'Development', 'Webflow'],
 			projectCta: 'My projects',
@@ -117,10 +125,40 @@ export const translations: Record<Locale, SiteCopy> = {
 			viewProject: 'View project',
 			discussProject: 'Discuss a project like',
 			projects: [
-				{ title: 'Brand identity and digital experience', category: 'Art Direction', description: 'A focused identity system built around typography, contrast and a direct editorial rhythm.' },
-				{ title: 'Digital product for modern teams', category: 'Product Design', description: 'A clear product experience that balances everyday usability with a distinctive visual voice.' },
-				{ title: 'Campaign built to move', category: 'Motion Graphic', description: 'A flexible campaign toolkit connecting still imagery, bold type and motion across every format.' },
+				{
+					title: 'Clinical session management platform',
+					category: 'Digital Product',
+					description: 'A clear digital experience for managing patient sessions, clinical follow-up and planning from a single workspace.',
+					image: '/images/proyecto-seguimiento-clinico.png',
+					imageAlt: 'Clinical session management dashboard with session list and planning calendar',
+					url: 'https://app.vrainhax.com',
+				},
+				{
+					title: 'Post: memories from a study trip',
+					category: 'Web Development',
+					description: 'A small social network created as an educational activity where students could share and preserve memories from their study trip.',
+					image: '/images/proyecto-post-red-social.png',
+					imageAlt: 'Post social network login screen on a mobile device',
+					imageFit: 'contain',
+					url: 'https://post-bay-six.vercel.app/',
+				},
+				{
+					title: 'Iris: a diary of student stories',
+					category: 'Digital Storytelling',
+					description: "A digital diary created for a university to share its students' stories, experiences and perspectives through an intimate editorial format.",
+					image: '/images/proyecto-iris.png',
+					imageAlt: 'Iris digital diary homepage presenting a collection of student stories',
+					url: 'https://iris-blond-five.vercel.app/',
+				},
 			],
+		},
+		contactModal: {
+			eyebrow: 'Contact',
+			title: "Let's talk.",
+			description: 'Choose the channel that works best for you and tell me about your project.',
+			whatsapp: 'WhatsApp Business',
+			email: 'Email',
+			close: 'Close contact window',
 		},
 		footer: {
 			availability: 'Available for selected projects',
@@ -149,10 +187,8 @@ export const translations: Record<Locale, SiteCopy> = {
 		},
 		hero: {
 			greeting: 'Hola, soy Juan.',
-			creativeLead: 'Developer',
-			creativeRole: 'DAM',
-			locationLead: 'Con base en',
-			city: 'Bilbao',
+			creativeLead: 'Diseñador de',
+			creativeRole: 'productos digitales',
 			disciplinesLabel: 'Diseño, desarrollo, Movíl y Webflow',
 			disciplines: ['Diseño', 'Desarrollo', 'Webflow'],
 			projectCta: 'Mis proyectos',
@@ -161,13 +197,13 @@ export const translations: Record<Locale, SiteCopy> = {
 		},
 		marquee: {
 			ariaLabel: 'Servicios creativos',
-			items: ['Branding', 'Desarrollo', 'Estrategia', 'Diseño de producto', 'Gráfica en movimiento', 'Dirección de arte', 'Diseño'],
+			items: ['Branding', 'Desarrollo', 'Estrategia', 'Diseño de producto', 'Gráfica en movimiento', 'Experiencia de usuario', 'Diseño'],
 		},
 		about: {
 			eyebrow: ['Juan', 'Barthhold'],
 			titleLines: ['Diseñador de', 'productos digitales.'],
 			lead: 'Transformo ideas complejas en productos claros, útiles y visualmente memorables.',
-			body: 'Trabajo entre diseño de producto, dirección de arte y desarrollo para crear experiencias consistentes de principio a fin.',
+			body: 'Trabajo entre diseño de producto, experiencia de usuario y desarrollo para crear experiencias consistentes de principio a fin.',
 			statsLabel: 'Estadísticas profesionales',
 			stats: [
 				{ value: '2', label: 'Años de experiencia' },
@@ -181,10 +217,40 @@ export const translations: Record<Locale, SiteCopy> = {
 			viewProject: 'Ver proyecto',
 			discussProject: 'Hablar sobre un proyecto como',
 			projects: [
-				{ title: 'Identidad de marca y experiencia digital', category: 'Dirección de arte', description: 'Un sistema de identidad centrado en la tipografía, el contraste y un ritmo editorial directo.' },
-				{ title: 'Producto digital para equipos modernos', category: 'Diseño de producto', description: 'Una experiencia clara que equilibra la utilidad diaria con una voz visual propia.' },
-				{ title: 'Una campaña creada para moverse', category: 'Gráfica en movimiento', description: 'Un sistema flexible que conecta imagen, tipografía y movimiento en todos los formatos.' },
+				{
+					title: 'Plataforma de gestión clínica',
+					category: 'Producto digital',
+					description: 'Una experiencia clara para gestionar sesiones de pacientes, seguimiento clínico y planificación desde un único espacio.',
+					image: '/images/proyecto-seguimiento-clinico.png',
+					imageAlt: 'Panel de gestión clínica con listado de sesiones y calendario de planificación',
+					url: 'https://app.vrainhax.com',
+				},
+				{
+					title: 'Post: recuerdos de un viaje de estudios',
+					category: 'Desarrollo web',
+					description: 'Una mini red social creada como actividad didáctica para que los estudiantes compartieran y conservaran los recuerdos de su viaje de estudios.',
+					image: '/images/proyecto-post-red-social.png',
+					imageAlt: 'Pantalla de acceso móvil de la red social Post',
+					imageFit: 'contain',
+					url: 'https://post-bay-six.vercel.app/',
+				},
+				{
+					title: 'Iris: un diario de historias estudiantiles',
+					category: 'Narrativa digital',
+					description: 'Un diario digital creado para una universidad con el objetivo de contar las historias, experiencias y perspectivas de sus estudiantes mediante un formato editorial cercano.',
+					image: '/images/proyecto-iris.png',
+					imageAlt: 'Página principal del diario digital Iris con una colección de historias estudiantiles',
+					url: 'https://iris-blond-five.vercel.app/',
+				},
 			],
+		},
+		contactModal: {
+			eyebrow: 'Contacto',
+			title: 'Hablemos.',
+			description: 'Elige el canal que te resulte más cómodo y cuéntame sobre tu proyecto.',
+			whatsapp: 'WhatsApp Business',
+			email: 'Correo electrónico',
+			close: 'Cerrar ventana de contacto',
 		},
 		footer: {
 			availability: 'Disponible para proyectos seleccionados',

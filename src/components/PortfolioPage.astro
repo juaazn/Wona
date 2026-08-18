@@ -3,6 +3,7 @@ import type { Locale } from '../i18n/translations';
 import { getTranslation } from '../i18n/translations';
 import Layout from '../layouts/Layout.astro';
 import About from './About.astro';
+import ContactModal from './ContactModal.astro';
 import Footer from './Footer.astro';
 import Header from './Header.astro';
 import Hero from './Hero.astro';
@@ -26,4 +27,5 @@ const copy = getTranslation(locale);
 		<Portfolio copy={copy.portfolio} />
 	</main>
 	<Footer copy={copy.footer} />
+	<ContactModal copy={copy.contactModal} />
 </Layout>
